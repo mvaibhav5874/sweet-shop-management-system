@@ -1,33 +1,32 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import AdminDashboard from "./pages/AdminDashboard";
-import ProtectedAdmin from "./components/ProtectedAdmin";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import Landing from "./pages/landing";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Shop from "./pages/shop";
+import AdminDashboard from "./pages/admindashboard";
+
+function AdminRoute({ children }) {
+  const role = localStorage.getItem("role");
+  return role === "admin" ? children : <Navigate to="/login" />;
+}
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public */}
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/shop" element={<Shop />} />
 
-        {/* User */}
-        <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* Admin */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedAdmin>
-              <AdminDashboard />
-            </ProtectedAdmin>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        }
+      />
+    </Routes>
   );
 }
