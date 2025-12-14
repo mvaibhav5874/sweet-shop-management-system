@@ -194,19 +194,4 @@ All logic and final implementation were reviewed and understood manually.
 
 ---
 
-## 📄 License
 
-This project is developed for educational purposes.
-
-```
-
----
-
-If you want next:
-- `.gitignore`  
-- Backend API documentation  
-- Deployment guide  
-- Resume-ready project description  
-
-Tell me what you want next.
-```
