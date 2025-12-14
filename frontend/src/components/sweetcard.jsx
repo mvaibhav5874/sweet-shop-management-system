@@ -1,42 +1,36 @@
 import api from "../services/api";
 
 export default function SweetCard({ sweet, refresh }) {
-  const role = localStorage.getItem("role");
-
- const purchase = async () => {
-  await api.post(`/sweets/${sweet._id}/purchase`);
-  if (onPurchase) onPurchase();
-  refresh();
-};
-
-  const remove = async () => {
-  const ok = window.confirm("Are you sure you want to delete this sweet?");
-  if (!ok) return;
-
-  await api.delete(`/sweets/${sweet._id}`);
-  refresh();
-};
+  const purchase = async () => {
+    await api.post(`/sweets/${sweet._id}/purchase`);
+    refresh();
+  };
 
   return (
-    <div className="card">
-      <h3>{sweet.name}</h3>
-      <p>Category: {sweet.category}</p>
-      <p>Price: ₹{sweet.price}</p>
-      <p>Stock: {sweet.quantity}</p>
+    <div className="bg-white rounded-2xl shadow hover:shadow-xl transition p-5">
+      <div className="h-36 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+        📦
+      </div>
+
+      <h3 className="font-semibold text-lg">{sweet.name}</h3>
+      <p className="text-sm text-gray-500">{sweet.category}</p>
+
+      <div className="flex justify-between items-center mt-3">
+        <span className="text-lg font-bold text-green-500">
+          ₹{sweet.price}
+        </span>
+        <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
+          {sweet.quantity} left
+        </span>
+      </div>
 
       <button
-        className="primary"
         disabled={sweet.quantity === 0}
         onClick={purchase}
+        className="w-full mt-4 py-2 rounded-xl font-semibold bg-gradient-to-r from-lime-400 to-yellow-300 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed"
       >
-        Purchase
+        Add to Cart
       </button>
-
-      {role === "admin" && (
-        <button className="danger" onClick={remove}>
-          Delete
-        </button>
-      )}
     </div>
   );
 }

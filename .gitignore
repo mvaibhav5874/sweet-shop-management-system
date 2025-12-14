@@ -1,0 +1,60 @@
+# =========================
+# NODE / JAVASCRIPT
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# ENVIRONMENT VARIABLES
+# =========================
+.env
+.env.local
+.env.development
+.env.production
+
+# =========================
+# BUILD OUTPUT
+# =========================
+dist/
+build/
+out/
+
+# =========================
+# VITE
+# =========================
+.vite/
+
+# =========================
+# CACHE & TEMP FILES
+# =========================
+.cache/
+.tmp/
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / EDITOR
+# =========================
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# LOG FILES
+# =========================
+logs/
+*.log
+
+# =========================
+# PYTHON (if any)
+# =========================
+__pycache__/
+*.pyc
+.venv/

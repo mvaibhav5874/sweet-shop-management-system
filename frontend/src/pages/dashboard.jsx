@@ -4,12 +4,10 @@ import SweetCard from "../components/SweetCard";
 import SearchBar from "../components/SearchBar";
 import AdminSweetForm from "../components/AdminSweetForm";
 import Navbar from "../components/Navbar";
-import Toast from "../components/Toast";
 
 export default function Dashboard() {
   const [sweets, setSweets] = useState([]);
   const [filters, setFilters] = useState({});
-  const [toast, setToast] = useState("");
   const role = localStorage.getItem("role");
 
   const loadSweets = async () => {
@@ -24,43 +22,41 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <Toast message={toast} />
 
-      <div className="container">
-        <h2>Sweets</h2>
+      <div className="bg-gray-50 min-h-screen">
+        {/* Hero */}
+        <div className="text-center py-12">
+          <h1 className="text-4xl font-extrabold text-gray-800">
+            Welcome to the Sweet Shop
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Discover delicious treats for every craving
+          </p>
+        </div>
 
-        <SearchBar setFilters={setFilters} />
+        <div className="max-w-7xl mx-auto px-6">
+          <SearchBar setFilters={setFilters} />
 
-        {role === "admin" && (
-          <AdminSweetForm
-              refresh={loadSweets}
-                  onSuccess={() => {
-                    setToast("Sweet added successfully!");
-                    setTimeout(() => setToast(""), 3000);
-                  }}
-          />
-        )}
+          {role === "admin" && (
+            <AdminSweetForm refresh={loadSweets} />
+          )}
 
-        {sweets.length === 0 ? (
-          <div className="empty">
-            <h3>No sweets found 🍩</h3>
-            <p>Try adjusting your search or filters.</p>
-          </div>
-        ) : (
-          <div className="grid">
-            {sweets.map((s) => (
-              <SweetCard
-                key={s._id}
-                sweet={s}
-                refresh={loadSweets}
-                onPurchase={() => {
-                  setToast("Purchase successful!");
-                  setTimeout(() => setToast(""), 3000);
-                }}
-              />
-            ))}
-          </div>
-        )}
+          {sweets.length === 0 ? (
+            <div className="text-center text-gray-500 mt-12">
+              No sweets found 🍩
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+              {sweets.map((s) => (
+                <SweetCard
+                  key={s._id}
+                  sweet={s}
+                  refresh={loadSweets}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
