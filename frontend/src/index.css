@@ -1,5 +1,17 @@
-@import "tailwindcss";
-.input {
-  @apply w-full px-4 py-3 rounded-xl border
-  focus:ring-2 focus:ring-green-400 outline-none;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Warm Bakery Theme */
+:root {
+  --bakery-cream: #FFF7ED;
+  --bakery-caramel: #D97706;
+  --bakery-honey: #F59E0B;
+  --bakery-chocolate: #92400E;
+  --bakery-soft: #FEF3C7;
+}
+/* Remove default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
 }
